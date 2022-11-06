@@ -297,6 +297,12 @@ class _GestureSubCategoryScreenState extends State<GestureSubCategoryScreen> {
       elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
+       leading: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.arrow_back_ios,color: Colors.black,),
+      ),
       title: Text(widget.conditionalString!,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontFamily: "Inter",
