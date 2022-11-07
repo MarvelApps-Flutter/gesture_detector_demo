@@ -43,8 +43,8 @@ A new flutter app for demonstrating object detection.
   </tr>
   <tr>
     <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios1.png" height="480px"></td>
-    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demoo/blob/master/screenshots/ios/ios2.png" height="480px"></td>
-    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demoo/blob/master/screenshots/ios/ios3.png" height="480px"></td>
+    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios2.png" height="480px"></td>
+    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios3.png" height="480px"></td>
   </tr>
  </table>
 
@@ -56,7 +56,7 @@ A new flutter app for demonstrating object detection.
   </tr>
   <tr>
     <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios4.png" height="480px"></td>
-    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demoo/blob/master/screenshots/ios/ios5.png" height="480px"></td>
-    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demoo/blob/master/screenshots/ios/ios6.png" height="480px"></td>
+    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios5.png" height="480px"></td>
+    <td><img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/ios/ios6.png" height="480px"></td>
   </tr>
  </table>
