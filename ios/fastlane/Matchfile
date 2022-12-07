@@ -1,4 +1,4 @@
-git_url("https://github.com/MarvelApps-Flutter/gesture_detector_demo.git")
+git_url("https://github.com/MarvelApps-Flutter/gesture_detector_demo")
 
 storage_mode("git")
 
