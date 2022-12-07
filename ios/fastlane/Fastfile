@@ -1,18 +1,3 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
 DEVELOPER_APP_ID = ENV["DEVELOPER_APP_ID"]
@@ -20,6 +5,10 @@ DEVELOPER_APP_IDENTIFIER = ENV["DEVELOPER_APP_IDENTIFIER"]
 PROVISIONING_PROFILE_SPECIFIER = ENV["PROVISIONING_PROFILE_SPECIFIER"]
 TEMP_KEYCHAIN_USER = ENV["TEMP_KEYCHAIN_USER"]
 TEMP_KEYCHAIN_PASSWORD = ENV["TEMP_KEYCHAIN_PASSWORD"]
+APPLE_ISSUER_ID = ENV["APPLE_ISSUER_ID"]
+APPLE_KEY_ID = ENV["APPLE_KEY_ID"]
+APPLE_KEY_CONTENT = ENV["APPLE_KEY_CONTENT"]
+GIT_AUTHORIZATION = ENV["GIT_AUTHORIZATION"]
 
 def delete_temp_keychain(name)
   delete_keychain(
@@ -32,7 +21,7 @@ def create_temp_keychain(name, password)
     name: name,
     password: password,
     unlock: false,
-    timeout: false
+    timeout: 0
   )
 end
 
@@ -42,25 +31,39 @@ def ensure_temp_keychain(name, password)
 end
 
 platform :ios do
-  desc "Push a new beta build to TestFlight"
   lane :beta do
     keychain_name = TEMP_KEYCHAIN_USER
     keychain_password = TEMP_KEYCHAIN_PASSWORD
     ensure_temp_keychain(keychain_name, keychain_password)
 
+    api_key = app_store_connect_api_key(
+      key_id: APPLE_KEY_ID,
+      issuer_id: APPLE_ISSUER_ID,
+      key_content: APPLE_KEY_CONTENT,            
+      duration: 1200,            
+      in_house: false
+    )
+    
+    increment_build_number(xcodeproj: "gesture_detector_demo.xcodeproj")
+    
+    cocoapods(
+      clean_install: true
+    )
+
     match(
       type: 'appstore',
       app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
-      git_basic_authorization: Base64.strict_encode64(ENV["GIT_AUTHORIZATION"]),
+      git_basic_authorization: Base64.strict_encode64(GIT_AUTHORIZATION),
       readonly: true,
       keychain_name: keychain_name,
-      keychain_password: keychain_password 
+      keychain_password: keychain_password,
+      api_key: api_key
     )
 
     gym(
       configuration: "Release",
-      workspace: "Runner.xcworkspace",
-      scheme: "Runner",
+      workspace: "FastlaneTest.xcworkspace",
+      scheme: "FastlaneTest",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: { 
@@ -76,17 +79,9 @@ platform :ios do
       skip_submission: true,
       distribute_external: false,
       notify_external_testers: false,
-      ipa: "./Runner.ipa"
+      ipa: "./fastlane.ipa"
     )
 
     delete_temp_keychain(keychain_name)
-  end
-end
-
-platform :ios do
-  desc "Push a new beta build to TestFlight"
-  lane :beta do
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight
   end
 end
