@@ -13,8 +13,10 @@ GIT_AUTHORIZATION = ENV["GIT_AUTHORIZATION"]
 def delete_temp_keychain(name)
   delete_keychain(
     name: name
-  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+  ) if File.exists?("~/Libary/Keychains/login.keychain-db")
+  FileUtils.rm_f("~/Libary/Keychains/login.keychain-db")
 end
+create_keychain(name: "login.keychain_db")
 
 def create_temp_keychain(name, password)
   create_keychain(
@@ -62,7 +64,7 @@ platform :ios do
 
     gym(
       configuration: "Release",
-      workspace: "FastlaneTest.xcworkspace",
+      workspace: "gesture_detector_demo.xcworkspace",
       scheme: "FastlaneTest",
       export_method: "app-store",
       export_options: {
