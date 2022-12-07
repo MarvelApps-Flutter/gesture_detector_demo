@@ -34,6 +34,7 @@ end
 
 platform :ios do
   lane :beta do
+    increment_build_number(xcodeproj: "Runner.xcodeproj")
     keychain_name = TEMP_KEYCHAIN_USER
     keychain_password = TEMP_KEYCHAIN_PASSWORD
     ensure_temp_keychain(keychain_name, keychain_password)
@@ -46,9 +47,7 @@ platform :ios do
       in_house: false
     )
     
-    increment_build_number(xcodeproj: "gesture_detector_demo.xcodeproj")
-    
-    cocoapods(
+    cocoapods(	
       clean_install: true
     )
 
@@ -64,7 +63,7 @@ platform :ios do
 
     gym(
       configuration: "Release",
-      workspace: "gesture_detector_demo.xcworkspace",
+      workspace: "Runner.xcworkspace",
       scheme: "FastlaneTest",
       export_method: "app-store",
       export_options: {
@@ -87,3 +86,4 @@ platform :ios do
     delete_temp_keychain(keychain_name)
   end
 end
+
