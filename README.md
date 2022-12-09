@@ -1,5 +1,5 @@
 # Gesture Detector demo
-A new flutter app for demonstrating gesture detector demo.
+A new flutter app for demonstrating gesture detector on basis of tap , double tap , long tap, scale and drag.
 
 # Demo
 <img src="https://github.com/MarvelApps-Flutter/gesture_detector_demo/blob/master/screenshots/gif/demo.gif" height="480px"></td>
